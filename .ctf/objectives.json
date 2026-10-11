@@ -1,0 +1,67 @@
+{
+  "objectives": [
+    {
+      "key": "main",
+      "title": "Read the flag",
+      "prompt": "Exploit the SQL injection weakness of a job search with a GraphQL endpoint (Strawberry) over SQLite and recover the flag (FLAG{...}) it guards.",
+      "check": {
+        "evidence": "SECRET",
+        "format": "FLAG{%s}"
+      },
+      "dev": "FLAG{dev-xben-038-simple-graphql}",
+      "capabilities": [
+        "sql-injection-detect-sqlite"
+      ],
+      "hints": [
+        "Find which input ends up inside the SQL query without being bound as a parameter.",
+        "Explore the GraphQL schema to see every query and argument available."
+      ],
+      "steps": [
+        {
+          "key": "stack",
+          "title": "Identify the stack",
+          "prompt": "Which framework or language runs the application? (name only)",
+          "check": {
+            "answer": [
+              "graphql",
+              "strawberry",
+              "python"
+            ]
+          }
+        },
+        {
+          "key": "class",
+          "title": "Name the weakness",
+          "prompt": "Which injection class does the vulnerable query suffer from?",
+          "check": {
+            "answer": [
+              "sqli",
+              "sql injection",
+              "sql-injection"
+            ]
+          }
+        },
+        {
+          "key": "api",
+          "title": "Find the API",
+          "prompt": "Which API query language wraps the vulnerable search?",
+          "check": {
+            "answer": [
+              "graphql"
+            ]
+          }
+        },
+        {
+          "key": "graphql",
+          "title": "Name the second weakness",
+          "prompt": "Which API query language does the application expose?",
+          "check": {
+            "answer": [
+              "graphql"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
